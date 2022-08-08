@@ -46,4 +46,76 @@ prod1.desconto = 0.06;
 console.log(prod1.resumo());
 const prod2 = new Produto('Caderno Escolar', 14.40, 0.15);
 console.log(prod2.resumo());
+class Carro {
+    constructor(marca, modelo, velocidadeMaxima = 200) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.velocidadeMaxima = velocidadeMaxima;
+        this.velocidadeAtual = 0;
+    }
+    alterarVelocidade(delta) {
+        const novaVelocidade = this.velocidadeAtual + delta;
+        const velocidadeValida = novaVelocidade >= 0 && novaVelocidade <= this.velocidadeMaxima;
+        if (velocidadeValida) {
+            this.velocidadeAtual = novaVelocidade;
+        }
+        else {
+            this.velocidadeAtual = delta > 0 ? this.velocidadeMaxima : 0;
+        }
+        return this.velocidadeAtual;
+    }
+    acelerar() {
+        return this.alterarVelocidade(5);
+    }
+    frear() {
+        return this.alterarVelocidade(-5);
+    }
+}
+const carro1 = new Carro('Ford', 'Ka', 185);
+console.log(carro1.acelerar());
+Array(50).fill(0).forEach(() => carro1.acelerar());
+console.log(carro1.acelerar());
+Array(30).fill(0).forEach(() => carro1.frear());
+console.log(carro1.frear());
+// simular erros
+// carro1.velocidadeAtual = 300;
+// console.log('Atual -> ' + carro1.velocidadeAtual);
+// carro1.velocidadeMaxima = 500;
+// console.log('Maxima -> ' + carro1.velocidadeMaxima);
+// carro1.alterarVelocidade(150);
+// console.log('Atual -> ' + carro1.velocidadeAtual);
+class Ferrari extends Carro {
+    constructor(modelo, velocidadeMaxima) {
+        super('Ferrari', modelo, velocidadeMaxima);
+    }
+    acelerar() {
+        return this.alterarVelocidade(35);
+    }
+    frear() {
+        return this.alterarVelocidade(-15);
+    }
+}
+const f40 = new Ferrari('F40', 340);
+console.log(`é uma ${f40.marca} ${f40.modelo}`);
+console.log(f40.acelerar());
+console.log(f40.frear());
+//Getters & Setters
+class Pessoa {
+    constructor() {
+        this._idade = 0;
+    }
+    get idade() {
+        return this._idade;
+    }
+    set idade(valor) {
+        if (valor >= 0 && valor <= 120) {
+            this._idade = valor;
+        }
+    }
+}
+const pessoa1 = new Pessoa();
+pessoa1.idade = 10;
+console.log(pessoa1.idade);
+pessoa1.idade = -3;
+console.log(pessoa1.idade);
 //# sourceMappingURL=classes.js.map
