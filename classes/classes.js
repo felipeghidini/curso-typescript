@@ -118,4 +118,60 @@ pessoa1.idade = 10;
 console.log(pessoa1.idade);
 pessoa1.idade = -3;
 console.log(pessoa1.idade);
+// Atributos e métodos estaticos
+class Matematica {
+    static areaCirc(raio) {
+        return this.PI * raio * raio;
+    }
+}
+Matematica.PI = 3.1416;
+console.log(Matematica.areaCirc(4));
+// Classe abstrata
+class Calculo {
+    constructor() {
+        this.resultado = 0;
+    }
+    getResultado() {
+        return this.resultado;
+    }
+}
+class Soma extends Calculo {
+    executar(...numeros) {
+        this.resultado = numeros.reduce((t, a) => t + a);
+    }
+}
+class Multiplicacao extends Calculo {
+    executar(...numeros) {
+        this.resultado = numeros.reduce((t, a) => t * a);
+    }
+}
+let c1 = new Soma();
+c1.executar(2, 3, 4, 5);
+console.log(c1.getResultado());
+let c2 = new Multiplicacao();
+c2.executar(2, 3, 4, 5);
+console.log(c2.getResultado());
+class Unico {
+    constructor() { }
+    static getInstance() {
+        return Unico.instance;
+    }
+    agora() {
+        return new Date;
+    }
+}
+Unico.instance = new Unico();
+// const errado = new Unico();
+console.log(Unico.getInstance().agora());
+// Somente leitura
+class Aviao {
+    constructor(modelo, prefixo) {
+        this.prefixo = prefixo;
+        this.modelo = modelo;
+    }
+}
+const turboHelice = new Aviao('Tu-114', 'PT-ABC');
+// turboHelice.modelo = 'DC-8';
+// turboHelice.prefixo = 'PT-12';
+console.log(turboHelice);
 //# sourceMappingURL=classes.js.map
